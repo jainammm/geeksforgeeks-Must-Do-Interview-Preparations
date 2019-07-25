@@ -56,7 +56,6 @@ int main()
     return 0;
 }
 
-
 /*This is a function problem.You only need to complete the function given below*/
 
 /*
@@ -72,5 +71,12 @@ struct Node {
 // Should reverse list and return new head.
 Node* reverseList(Node *head)
 {
-  // Your code here
+  if(head->next == NULL){
+      return head;
+  }
+  Node *temp = head->next;
+  Node* ans = reverseList(head->next);
+  head->next = NULL;
+  temp->next = head;
+  return ans;
 }
