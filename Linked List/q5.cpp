@@ -87,8 +87,8 @@ node* reverseList(node *head)
 
 struct node *reverse (struct node *head, int k)
 { 
-    if(head->next == NULL){
-      return head;
+  if(head->next == NULL){
+    return head;
   }
   node *temp = head;
   int n = k;
