@@ -9,16 +9,22 @@ using namespace std;
 
 bool isCyclicComponent(int v,vector<int> adj[],bool vis[], bool recStack[]){
     
-    if(vis[v] == false){  
+    if(vis[v] == false)
         vis[v] = true; 
-        recStack[v] = true; 
+    
+    recStack[v] = true; 
 
-        for(int i = 0; i != adj[v].size(); i++) 
-        { 
-            if ( !vis[i] && isCyclicComponent(i, adj, vis, recStack) ) 
-                return true; 
-            else if (recStack[i]) 
-                return true; 
+    for(int i = 0; i != adj[v].size(); i++) 
+    { 
+        if ( !recStack[adj[v][i]]  ){
+            if(isCyclicComponent(adj[v][i], adj, vis, recStack)){
+                //cout<<"from here";
+                return true;
+            }
+        } 
+        else {
+            //cout<<"no, from here";
+            return true; 
         }
     }
 
@@ -36,8 +42,9 @@ bool isCyclic(int V, vector<int> adj[])
     }
 
     for(int i = 0; i < V; i++) 
-        if (isCyclicComponent(i, adj, vis, recStack)) 
-            return true; 
+        if(!vis[i])
+            if (isCyclicComponent(i, adj, vis, recStack)) 
+                return true; 
     return false;
 
 }
