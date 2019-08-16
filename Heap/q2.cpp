@@ -99,19 +99,33 @@ struct MinHeap
 /* Removes min element from min heap and returns it */
 int MinHeap ::  extractMin()
 {
-    // Your code here
+    if(heap_size == 0){
+        return -1;
+    }
+    int minele = harr[0];
+    deleteKey(0);
+    return minele;
 }
 /* Removes element from position x in the min heap  */
 void MinHeap :: deleteKey(int i)
 {
-    // Your code here
+    if(i >= heap_size)
+        return;
+    harr[i] = harr[heap_size-1];
+    heap_size--;
+    MinHeapify(i);
+
 }
 /* Inserts an element at position x into the min heap*/
 void MinHeap ::insertKey(int k)
 {
-   // Your code here
+    if(heap_size == capacity)
+        return;
+    decreaseKey(heap_size, k);
+    heap_size++;
 }
 // Decrease Key operation, helps in deleting key from heap
+// upheap
 void MinHeap::decreaseKey(int i, int new_val)
 {
     harr[i] = new_val;
@@ -124,6 +138,7 @@ void MinHeap::decreaseKey(int i, int new_val)
 /* You may call below MinHeapify function in 
    above codes. Please do not delete this code
    if you are not writing your own MinHeapify */
+// downheap
 void MinHeap::MinHeapify(int i)
 {
     int l = left(i);
